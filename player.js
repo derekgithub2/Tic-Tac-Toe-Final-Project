@@ -13,4 +13,4 @@ class Player {
   // increaseWins function
 }
 
-module.exports = Player;
+module.exports = Player

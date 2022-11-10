@@ -2,36 +2,32 @@ const Player = require("./player");
 
 class Game {
   constructor(player1, player2) {
-    this.board = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-    this.player1 = new Player(1, "x");
-    this.player2 = new Player(2, "o");
-    this.currentPlayer = this.player1;
-    this.turnCounter = 0;
-    // so each instance of game has 2 new instances of players in the constructor
+    this.board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    this.player1 = new Player(1, "😈")
+    this.player2 = new Player(2, "👽")
+    this.currentPlayer = this.player1
+    this.turnCounter = 0
   }
 
-  // function to determine who's turn it is
   changeTurn() {
-    this.turnCounter++;
+    this.turnCounter++
     if (this.turnCounter % 2 === 1) {
-      this.player1.turn = true;
-      this.player2.turn = false;
-      this.currentPlayer = this.player1;
+      this.player1.turn = true
+      this.player2.turn = false
+      this.currentPlayer = this.player1
     } else if (this.turnCounter % 2 === 0) {
-      this.player2.turn = true;
-      this.player1.turn = false;
-      this.currentPlayer = this.player2;
+      this.player2.turn = true
+      this.player1.turn = false
+      this.currentPlayer = this.player2
     }
   }
 
-  // function to change array when player makes move
   makeMove(indexOfMove) {
     if (this.currentPlayer.turn === true) {
       this.board.splice(indexOfMove, 1, this.currentPlayer.token);
     }
   }
 
-  // function to determine winner switch-statement
   checkBoard() {
     switch (this.currentPlayer.token) {
       case this.board[0] && this.board[1] && this.board[2]:

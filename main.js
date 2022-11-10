@@ -1,40 +1,37 @@
 // main.js contains all DOM related JavaScript
 
 // Global Variables
-const Player = require("./player")
-const Game = require("./game")
+// const Player = require('./player')
+const Game = require('./game')
 
-// var player1 = new Player()
-// var player2 = new Player()
 var game = new Game
-// player 1 icon
-// player 2 icon
-
 
 // Query Selectors
-
+var boardGrid = document.querySelector('#gameBoard')
 //queryselect the entire board container
     // event.target in the event listener to specify which box is being clicked.
 
 
 // Event Listeners
-// window.addEventListener('on load', function() {
+window.addEventListener('on load', startGame)
+boardGrid.addEventListener('click', function(){
+    game.changeTurn()
+    game.makeMove()
+    game.checkBoard()
 
-// })
-    //eventlisteners for whole board container and listen for clicks inside it. 
-        // event.target for the position? or write out event listener for each position?
+})
+
+//eventlisteners for whole board container and listen for clicks inside it. 
+    // event.target for the position? or write out event listener for each position?
 
 
 // Functions and Event Handlers
 
-// function to place piece when player clicks position
-    // gameBoard.splice(inputPosition, 0, 'player1')
-
 function startGame () {
     game.changeTurn()
-    console.log(game)
+    game.makeMove()
+    game.checkBoard()
 }
-startGame()
 
 // console.log(game.player1)
 // console.log(game.player2)
@@ -69,15 +66,14 @@ startGame()
 
 // console.log(game.player1)
 // console.log(game.player2)
-game.makeMove(0)
-game.makeMove(1)
-game.makeMove(2)
-game.makeMove(5)
-console.log(game.board)
-game.checkBoard()
-console.log(game.currentPlayer.wins)
+// game.makeMove(0)
+// game.makeMove(1)
+// game.makeMove(2)
+// game.makeMove(5)
+// console.log(game.board)
+// game.checkBoard()
+// console.log(game.currentPlayer.wins)
 
 
 // function to determine the winner
     // for loop through array to see what is spliced into the array at what index
-    
