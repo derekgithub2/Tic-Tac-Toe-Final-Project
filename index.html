@@ -4,25 +4,33 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css" />
     <title>Tic Tac Toe</title>
   </head>
   <body>
-    <section class="left-side">Player 1</section>
+    <section class="left-side">
+      Player 1
+      <div></div>
+    </section>
     <main>
+      <h2>INSERT TITLE HERE</h2>
+      <div class="player-turn-display" id="playerTurnDisplay">Player 1's turn</div>
       <section class="game-board" id="gameBoard">
-        <button type="button" id="box1">Position1</button>
-        <button type="button" id="box2">Position2</button>
-        <button type="button" id="box3">Position3</button>
-        <button type="button" id="box4">Position4</button>
-        <button type="button" id="box5">Position5</button>
-        <button type="button" id="box6">Position6</button>
-        <button type="button" id="box7">Position7</button>
-        <button type="button" id="box8">Position8</button>
-        <button type="button" id="box9">Position9</button>
+        <button type="button" className="box" id="box1">Box1</button>
+        <button type="button" id="box2">Box2</button>
+        <button type="button" id="box3">Box3</button>
+        <button type="button" id="box4">Box4</button>
+        <button type="button" id="box5">Box5</button>
+        <button type="button" id="box6">Box6</button>
+        <button type="button" id="box7">Box7</button>
+        <button type="button" id="box8">Box8</button>
+        <button type="button" id="box9">Box9</button>
       </section>
     </main>
-    <section class="right-side">Player 2</section>
+    <section class="right-side">
+      Player 2
+      <div></div>
+    </section>
     <script src="player.js"></script>
     <script src="game.js"></script>
     <script src="main.js"></script>

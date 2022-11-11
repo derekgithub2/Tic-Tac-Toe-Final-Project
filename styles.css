@@ -11,6 +11,17 @@ body {
     border: 5px solid black;
 }
 
+h2 {
+    display: flex;
+    justify-content: center;
+}
+
+.player-turn-display {
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+}
+
 .game-board {
     display: flex;
     width: 50vh;
@@ -21,9 +32,8 @@ body {
     border: 3px solid black;
 }
 
-
 button {
-    font-size: 10px;
+    font-size: 30px;
     height: 100px;
     width: 30%;
     border: none;

@@ -10,7 +10,4 @@ class Player {
     this.wins++;
   }
 
-  // increaseWins function
 }
-
-module.exports = Player

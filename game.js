@@ -1,10 +1,8 @@
-const Player = require("./player");
-
 class Game {
   constructor(player1, player2) {
     this.board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-    this.player1 = new Player(1, "😈")
-    this.player2 = new Player(2, "👽")
+    this.player1 = new Player(1, "🍺")
+    this.player2 = new Player(2, "🍷")
     this.currentPlayer = this.player1
     this.turnCounter = 0
   }
@@ -45,9 +43,6 @@ class Game {
   }
 }
 
-module.exports = Game;
-
-// include 2 Player instances
 // a way to keep track of data for the game board --> array
 // a way to keep track of whos turn it is --> changeTurn()
 // check the game's board data for win conditions --> checkBoard() or determineWinner()
