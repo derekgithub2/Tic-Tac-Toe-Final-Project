@@ -1,5 +1,5 @@
 class Game {
-  constructor(player1, player2) {
+  constructor() {
     this.board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     this.player1 = new Player(1, "🍺")
     this.player2 = new Player(2, "🍷")
@@ -9,6 +9,8 @@ class Game {
 
   changeTurn() {
     this.turnCounter++
+    console.log(this.turnCounter)
+    console.log(`modulo 0: ${0%2}`)
     if (this.turnCounter % 2 === 1) {
       this.player1.turn = true
       this.player2.turn = false
@@ -21,9 +23,14 @@ class Game {
   }
 
   makeMove(indexOfMove) {
+    console.log(`indexOfMove: ${indexOfMove}`)
+    console.log(`currentPlayer: ${this.currentPlayer.id}`)
+    console.log(`currentPlayer turn: ${this.currentPlayer.turn}`)
     if (this.currentPlayer.turn === true) {
       this.board.splice(indexOfMove, 1, this.currentPlayer.token);
     }
+    this.changeTurn()
+    console.log(game.board)
   }
 
   checkBoard() {
@@ -42,6 +49,8 @@ class Game {
     }
   }
 }
+
+// module.exports = Game
 
 // a way to keep track of data for the game board --> array
 // a way to keep track of whos turn it is --> changeTurn()

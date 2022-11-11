@@ -1,36 +1,43 @@
-var game = new Game
+// const Game = require('./game')
+var game = new Game()
 
-// Query Selectors
+// Query Selectors 
+var formContainer = document.querySelector('#formContainer')
+var submitButton = document.querySelector('#formSubmitButton')
 var boardGrid = document.querySelector('#gameBoard')
 
 // Event Listeners
+submitButton.addEventListener('click', function(event){
+    changeDisplay(event)
+    startGame()
+})
 boardGrid.addEventListener('click', function(event){
-    game.makeMove()
-    game.changeTurn()
+    game.makeMove(parseInt(event.target.id))
     updateBoard(event)
     game.checkBoard()
 })
 
 
 // Functions and Event Handlers
+function changeDisplay (event) {
+    event.preventDefault()
+    formContainer.classList.add('hidden')
+    boardGrid.classList.remove('hidden')
+}
+
 function startGame () {
-    console.log("game has started")
     game.changeTurn()
-    game.makeMove()
-    game.checkBoard()
 }
 
 function updateBoard (event) {
     if (event.target.type === 'button') {
         event.target.innerText = ''
         event.target.innerText = game.currentPlayer.token
-        return true
     } else {
-        game.changeTurn()
+        // game.changeTurn()
         console.log("Not a valid spot.")
     }
 }
-
 
 
 // function to determine the winner
@@ -75,6 +82,9 @@ function updateBoard (event) {
 // game.makeMove(5)
 // console.log(game.board)
 // game.checkBoard()
-// console.log(game.currentPlayer.wins)
+// console.log(`Player${game.currentPlayer.id} wins: ${game.currentPlayer.wins}`)
+// console.log(game.player2)
+// console.log(game.player1)
+
 
 
