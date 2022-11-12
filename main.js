@@ -1,10 +1,10 @@
-// const Game = require('./game')
 var game = new Game()
 
 // Query Selectors 
 var formContainer = document.querySelector('#formContainer')
 var submitButton = document.querySelector('#formSubmitButton')
 var boardGrid = document.querySelector('#gameBoard')
+var turnDisplay = document.querySelector("#playerTurnDisplay")
 
 // Event Listeners
 submitButton.addEventListener('click', function(event){
@@ -12,21 +12,21 @@ submitButton.addEventListener('click', function(event){
     startGame()
 })
 boardGrid.addEventListener('click', function(event){
-    game.makeMove(parseInt(event.target.id))
     updateBoard(event)
+    game.makeMove(parseInt(event.target.id))
     game.checkBoard()
+    game.changeTurn()
 })
 
-
 // Functions and Event Handlers
+function startGame () {
+    game.start()
+}
+
 function changeDisplay (event) {
     event.preventDefault()
     formContainer.classList.add('hidden')
     boardGrid.classList.remove('hidden')
-}
-
-function startGame () {
-    game.changeTurn()
 }
 
 function updateBoard (event) {
@@ -38,6 +38,10 @@ function updateBoard (event) {
         console.log("Not a valid spot.")
     }
 }
+
+// function disableButton (event) {
+//     if (event.target)
+// }
 
 
 // function to determine the winner
