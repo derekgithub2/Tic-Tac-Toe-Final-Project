@@ -43,6 +43,7 @@ h2 {
     width: 30%;
     border: none;
     background-color: white;
+    cursor: pointer;
 }
 
 .box1,
@@ -73,3 +74,7 @@ h2 {
 .hidden {
     display: none;
 }
+
+.disabled {
+    pointer-events: none;
+} 
