@@ -15,7 +15,7 @@ class Game {
 
   changeTurn() {
     this.turnCounter++;
-    console.log(`turnCounter: ${this.turnCounter}`)
+    // console.log(`turnCounter: ${this.turnCounter}`)
     // REFACTOR using bang operator.
     if (this.turnCounter % 2 === 1) {
       // this.currentPlayer = !this.currentPlayer
@@ -31,8 +31,8 @@ class Game {
   }
 
   makeMove(indexOfMove) {
-    console.log(`indexOfMove: ${indexOfMove}`);
-    console.log(`currentPlayer: ${this.currentPlayer.id}`);
+    // console.log(`indexOfMove: ${indexOfMove}`);
+    // console.log(`currentPlayer: ${this.currentPlayer.id}`);
     if (
       this.board[indexOfMove] !== this.player1.token ||
       this.board[indexOfMove] !== this.player2.token
@@ -43,7 +43,7 @@ class Game {
     } else {
         return false
     }
-    console.log(this.board)
+    // console.log(this.board)
   }
 
   preventPlacement (placeholder) {

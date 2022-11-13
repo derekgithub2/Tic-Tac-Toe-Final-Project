@@ -17,12 +17,12 @@ boardGrid.addEventListener('click', function(event){
     if (game.preventPlacement(parseInt(event.target.id))) {
         placeToken(parseInt(event.target.id))
         updateBoard(event)
+        determineWinner()
         game.changeTurn()
-        game.checkBoard()
-        console.log("move was made and turn was changed.")
+        // console.log("move was made and turn was changed.")
     } else if (!game.preventPlacement(parseInt(event.target.id))) {
-        // error handling
-        console.log("placement of piece prevented.")
+        // error handling HERE
+        // console.log("placement of piece prevented.")
         return false
     }
 })
@@ -47,11 +47,12 @@ function updateBoard (event) {
 }
 
 function placeToken (index) {
-    // if (game.board[index] !== game.player1.token || game.board[index] !== game.player2.token) {
-        game.makeMove(index)
-    // }
+    game.makeMove(index)
 }
 
+function determineWinner () {
+    game.checkBoard()
+}
 //function to determine a draw (probably in game.js file)
 
 
