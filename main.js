@@ -4,25 +4,31 @@ var game = new Game()
 var formContainer = document.querySelector('#formContainer')
 var submitButton = document.querySelector('#formSubmitButton')
 var boardGrid = document.querySelector('#gameBoard')
-var turnDisplay = document.querySelector("#playerTurnDisplay")
+var notificationDisplay = document.querySelector("#notificationDisplay")
+var p1Name = document.querySelector('#player1Name')
+var p2Name = document.querySelector('#player2Name')
+var p1Label = document.querySelector('#player1NameLabel')
+var p1InputName = document.querySelector('#player1Input')
+var p2Label = document.querySelector('#player2NameLabel')
+var p2InputName = document.querySelector('#player2Input')
 
 // Event Listeners
 submitButton.addEventListener('click', function(event){
     changeDisplay(event)
+    updatePlayerNames()
     startGame()
 })
 
 boardGrid.addEventListener('click', function(event){
-    console.log(game.preventPlacement())
-    if (game.preventPlacement(parseInt(event.target.id))) {
-        placeToken(parseInt(event.target.id))
+    var indexNum = parseInt(event.target.id)
+    if (game.preventPlacement(indexNum) == true) {
+        placeToken(indexNum)
         updateBoard(event)
         determineWinner()
         game.changeTurn()
-        // console.log("move was made and turn was changed.")
-    } else if (!game.preventPlacement(parseInt(event.target.id))) {
+    } else if (game.preventPlacement(indexNum) == false) {
         // error handling HERE
-        // console.log("placement of piece prevented.")
+        console.log("placement of piece prevented.")
         return false
     }
 })
@@ -38,11 +44,21 @@ function changeDisplay (event) {
     boardGrid.classList.remove('hidden')
 }
 
+// function to use player input as their name
+function updatePlayerNames () {
+    p1Name.innerText = p1InputName.value
+    p2Name.innerText = p2InputName.value
+    game.player1.id = p1InputName.value
+    game.player2.id = p2InputName.value
+}
+
 function updateBoard (event) {
-    if (event.target.type === 'button') {
+    if (event.target.type === 'button' && event.target.innerText === "") {
         event.target.innerText = game.currentPlayer.token
     } else {
+        // error handle HERE
         console.log("Not a valid spot.")
+        return false;
     }
 }
 
@@ -51,53 +67,34 @@ function placeToken (index) {
 }
 
 function determineWinner () {
-    game.checkBoard()
+    console.log(game.turnCounter)
+    // game.checkBoard()
+    if (game.checkBoard() === game.player1.token) {
+        var player1 = game.player1
+        player1.increaseWins()`
+            <section class="pop-up-container">
+                <p>${game.player1.id} wins!</p>
+                <button onclick="setTimeout(reloadGame(), 3000)" class="draw-pop-up">Play again?</button>
+            </section>`
+        console.log(`player 1 wins: ${game.player1.wins}`)
+    } else if (game.checkBoard() === game.player2.token) {
+        var player2 = game.player2
+        player2.increaseWins()`
+            <section class="pop-up-container">
+                <p>${game.player2.id} wins!</p>
+                <button onclick="setTimeout(reloadGame(), 3000)" class="draw-pop-up">Play again?</button>
+            </section>`
+        console.log(`player 2 wins: ${game.player2.wins}`)
+    } else if (game.turnCounter === 8) {
+        notificationDisplay.innerHTML +=`
+            <section class="pop-up-container">
+                <p>It's a draw!</p>
+                <button onclick="setTimeout(reloadGame(), 3000)"
+                class="draw-pop-up">Play again?</button>
+            </section>`
+        console.log("game is a draw")
+    }
 }
-//function to determine a draw (probably in game.js file)
-
-
-// function to determine the winner
-    // for loop through array to see what is spliced into the array at what index
-
-// console.log(game.player1)
-// console.log(game.player2)
-
-// game.makeMove(0)
-// console.log("counter", game.turnCounter)
-// console.log(game.board)
-// console.log("----------------")
-
-// game.changeTurn()
-// console.log("counter", game.turnCounter)
-// game.makeMove(4)
-// console.log(game.board)
-
-// console.log("----------------")
-// game.changeTurn()
-// console.log("counter", game.turnCounter)
-// game.makeMove(1)
-// console.log(game.board)
-
-// console.log("----------------")
-// game.changeTurn()
-// console.log("counter", game.turnCounter)
-// game.makeMove(9)
-// console.log(game.board)
-
-// console.log("----------------")
-// game.changeTurn()
-// console.log("counter", game.turnCounter)
-// game.makeMove(2)
-// console.log(game.board)
-
-// console.log(game.player1)
-// console.log(game.player2)
-// game.makeMove(0)
-// game.makeMove(1)
-// game.makeMove(2)
-// game.makeMove(5)
-// console.log(game.board)
-// game.checkBoard()
-// console.log(`Player${game.currentPlayer.id} wins: ${game.currentPlayer.wins}`)
-// console.log(game.player2)
-// console.log(game.player1)
+function reloadGame() {
+    window.location.reload()
+}

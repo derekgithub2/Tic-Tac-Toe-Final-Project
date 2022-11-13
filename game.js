@@ -4,7 +4,6 @@ class Game {
     this.player1 = new Player(1, "X");
     this.player2 = new Player(2, "O");
     this.currentPlayer = this.player1;
-    // this.otherPlayer = this.player2
     this.turnCounter = 0;
   }
 
@@ -15,15 +14,12 @@ class Game {
 
   changeTurn() {
     this.turnCounter++;
-    // console.log(`turnCounter: ${this.turnCounter}`)
     // REFACTOR using bang operator.
     if (this.turnCounter % 2 === 1) {
-      // this.currentPlayer = !this.currentPlayer
       this.player1.turn = false;
       this.player2.turn = true;
       this.currentPlayer = this.player2;
     } else if (this.turnCounter % 2 === 0) {
-      // this.currentPlayer = !this.currentPlayer
       this.player2.turn = false;
       this.player1.turn = true;
       this.currentPlayer = this.player1;
@@ -31,80 +27,63 @@ class Game {
   }
 
   makeMove(indexOfMove) {
-    // console.log(`indexOfMove: ${indexOfMove}`);
-    // console.log(`currentPlayer: ${this.currentPlayer.id}`);
     if (
-      this.board[indexOfMove] !== this.player1.token ||
+      this.board[indexOfMove] !== this.player1.token &&
       this.board[indexOfMove] !== this.player2.token
     ) {
       if (this.currentPlayer.turn === true) {
         this.board.splice(indexOfMove, 1, this.currentPlayer.token);
       }
     } else {
-        return false
+      return false;
     }
-    // console.log(this.board)
   }
 
-  preventPlacement (placeholder) {
-    if (this.board[placeholder] === this.player1.token || this.player2.token) {
-        console.log(`placeholder: ${placeholder}`)
-        return true
-    } else {
-        return false
+  preventPlacement(indexPlaced) {
+    if (this.board[indexPlaced] !== this.player1.token && this.player2.token) {
+      console.log(this.board[indexPlaced]);
+      return true;
+    } else if (this.board[indexPlaced] === this.player1.token || this.player2.token) {
+      return false;
     }
+  }
+
+  tokenHelper(a, b, c) {
+    return this.board[a] === this.board[b] && this.board[b] === this.board[c];
   }
 
   checkBoard() {
-    if (this.board[0] === this.board[1] && this.board[1] === this.board[2]) {
-      console.log(`${this.currentPlayer.token} wins!`);
-      this.currentPlayer.increaseWins();
-    } else if (
-      this.board[3] == this.board[4] &&
-      this.board[4] == this.board[5]
-    ) {
-      console.log(`${this.currentPlayer.token} wins!`);
-      this.currentPlayer.increaseWins();
-    } else if (
-      this.board[6] == this.board[7] &&
-      this.board[7] == this.board[8]
-    ) {
-      console.log(`${this.currentPlayer.token} wins!`);
-      this.currentPlayer.increaseWins();
-    } else if (
-      this.board[0] == this.board[4] &&
-      this.board[4] == this.board[8]
-    ) {
-      console.log(`${this.currentPlayer.token} wins!`);
-      this.currentPlayer.increaseWins();
-    } else if (
-      this.board[0] == this.board[3] &&
-      this.board[3] == this.board[6]
-    ) {
-      console.log(`${this.currentPlayer.token} wins!`);
-      this.currentPlayer.increaseWins();
-    } else if (
-      this.board[1] == this.board[4] &&
-      this.board[4] == this.board[7]
-    ) {
-      console.log(`${this.currentPlayer.token} wins!`);
-      this.currentPlayer.increaseWins();
-    } else if (
-      this.board[2] == this.board[5] &&
-      this.board[5] == this.board[8]
-    ) {
-      console.log(`${this.currentPlayer.token} wins!`);
-      this.currentPlayer.increaseWins();
-    } else if (
-      this.board[2] == this.board[4] &&
-      this.board[4] == this.board[6]
-    ) {
-      console.log(`${this.currentPlayer.token} wins!`);
-      this.currentPlayer.increaseWins();
+    if (this.tokenHelper(0, 1, 2)) {
+      console.log(`${this.currentPlayer.token} wins by top row`);
+      return this.currentPlayer.token;
+    }
+    if (this.tokenHelper(3, 4, 5)) {
+      console.log(`${this.currentPlayer.token} wins by middle row`);
+      return this.currentPlayer.token;
+    }
+    if (this.tokenHelper(6, 7, 8)) {
+      console.log(`${this.currentPlayer.token} wins by bottom row`);
+      return this.currentPlayer.token;
+    }
+    if (this.tokenHelper(0, 4, 8)) {
+      console.log(`${this.currentPlayer.token} wins by top left diag`);
+      return this.currentPlayer.token;
+    }
+    if (this.tokenHelper(0, 3, 6)) {
+      console.log(`${this.currentPlayer.token} wins by left column`);
+      return this.currentPlayer.token;
+    }
+    if (this.tokenHelper(1, 4, 7)) {
+      console.log(`${this.currentPlayer.token} wins middle column`);
+      return this.currentPlayer.token;
+    }
+    if (this.tokenHelper(2, 5, 8)) {
+      console.log(`${this.currentPlayer.token} wins right column`);
+      return this.currentPlayer.token;
+    }
+    if (this.tokenHelper(2, 4, 6)) {
+      console.log(`${this.currentPlayer.token} wins top right diag`);
+      return this.currentPlayer.token;
     }
   }
 }
-
-// detect when a game is a draw (no one has won)
-// way to reset the Game's board to begin a new game
-// a short timeout is used after a comppleted game to reset the board.

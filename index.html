@@ -9,39 +9,38 @@
   </head>
   <body>
     <section class="left-side">
-      Player 1
-      <div></div>
+      <p class="player" id="player1Name">Player 1</p>
+      <p class="player" id="player1Wins">Wins: </p>
     </section>
     <main>
       <h2>TIC TAC TOE</h2>
-      <div class="player-turn-display" id="playerTurnDisplay">Player 1's turn</div>
-      <!-- <button type="button" id="startGameButton">Start Game!</button> -->
+      <div class="notification-display" id="notificationDisplay"></div>
       <form class="form-container" id="formContainer">
         <fieldset class="player1">
-            <label for="PlayerName">Player1Name</label>
-            <input type="text" name="player1name" class="form-input" id="player1Input">
+            <label for="PlayerName" id="player1NameLabel">Player 1's Name</label>
+            <input type="text" class="form-input" id="player1Input">
         </fieldset>
         <fieldset class="player2">
-            <label for="PlayerName">Player2Name</label>
-            <input type="text" name="player2name" class="form-input" id="player2Input">
+            <label for="PlayerName" id="player1NameLabel">Player 2's Name</label>
+            <input type="text" class="form-input" id="player2Input">
         </fieldset>
         <input type="submit" id="formSubmitButton">
       </form>
       <section class="game-board hidden" id="gameBoard">
-        <button type="button" class="box1 board-button" id="0">Box1</button>
-        <button type="button" class="box2 board-button" id="1">Box2</button>
-        <button type="button" class="box3 board-button" id="2">Box3</button>
-        <button type="button" class="box4 board-button" id="3">Box4</button>
-        <button type="button" class="box5 board-button" id="4">Box5</button>
-        <button type="button" class="box6 board-button" id="5">Box6</button>
-        <button type="button" class="box7 board-button" id="6">Box7</button>
-        <button type="button" class="box8 board-button" id="7">Box8</button>
-        <button type="button" class="box9 board-button" id="8">Box9</button>
+        <button type="button" class="box1 board-button" id="0"></button>
+        <button type="button" class="box2 board-button" id="1"></button>
+        <button type="button" class="box3 board-button" id="2"></button>
+        <button type="button" class="box4 board-button" id="3"></button>
+        <button type="button" class="box5 board-button" id="4"></button>
+        <button type="button" class="box6 board-button" id="5"></button>
+        <button type="button" class="box7 board-button" id="6"></button>
+        <button type="button" class="box8 board-button" id="7"></button>
+        <button type="button" class="box9 board-button" id="8"></button>
       </section>
     </main>
     <section class="right-side">
-      Player 2
-      <div></div>
+      <p class="player" id="player2Name">Player 2</p>
+      <p class="player" id="player2Wins">Wins: </p>
     </section>
     <script src="player.js"></script>
     <script src="game.js"></script>
