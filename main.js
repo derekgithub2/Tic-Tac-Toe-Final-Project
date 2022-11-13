@@ -70,16 +70,16 @@ function determineWinner () {
     console.log(game.turnCounter)
     // game.checkBoard()
     if (game.checkBoard() === game.player1.token) {
-        var player1 = game.player1
-        player1.increaseWins()`
+        game.increaseWins()
+        notificationDisplay.innerHTML +=`
             <section class="pop-up-container">
                 <p>${game.player1.id} wins!</p>
                 <button onclick="setTimeout(reloadGame(), 3000)" class="draw-pop-up">Play again?</button>
             </section>`
         console.log(`player 1 wins: ${game.player1.wins}`)
     } else if (game.checkBoard() === game.player2.token) {
-        var player2 = game.player2
-        player2.increaseWins()`
+        game.increaseWins()
+        notificationDisplay.innerHTML +=`
             <section class="pop-up-container">
                 <p>${game.player2.id} wins!</p>
                 <button onclick="setTimeout(reloadGame(), 3000)" class="draw-pop-up">Play again?</button>

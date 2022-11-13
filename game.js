@@ -86,4 +86,8 @@ class Game {
       return this.currentPlayer.token;
     }
   }
+
+  increaseWins() {
+    this.currentPlayer.wins++;
+  }
 }

@@ -6,9 +6,4 @@ class Player {
     this.turn = null
     this.board = []
   }
-
-  increaseWins() {
-    this.wins++;
-  }
-
 }
