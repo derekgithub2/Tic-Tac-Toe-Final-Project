@@ -13,6 +13,10 @@ var p2Label = document.querySelector('#player2NameLabel')
 var p2InputName = document.querySelector('#player2Input')
 
 // Event Listeners
+formContainer.addEventListener('input', function () {
+    enableSubmitButton()
+})
+
 submitButton.addEventListener('click', function(event){
     changeDisplay(event)
     updatePlayerNames()
@@ -38,8 +42,17 @@ function startGame () {
     game.start()
 }
 
+function enableSubmitButton () {
+    if (p1InputName.value !== '' && p2InputName.value !== '') {
+        submitButton.classList.remove('disabled')
+    } else {
+        submitButton.classList.add('disabled')
+    }
+}
+
 function changeDisplay (event) {
     event.preventDefault()
+    notificationDisplay.classList.remove('hidden')
     formContainer.classList.add('hidden')
     boardGrid.classList.remove('hidden')
 }
@@ -68,12 +81,11 @@ function placeToken (index) {
 
 function determineWinner () {
     console.log(game.turnCounter)
-    // game.checkBoard()
     if (game.checkBoard() === game.player1.token) {
         game.increaseWins()
         notificationDisplay.innerHTML +=`
             <section class="pop-up-container">
-                <p>${game.player1.id} wins!</p>
+                <h4>${game.player1.id} wins!</h4>
                 <button onclick="setTimeout(reloadGame(), 3000)" class="draw-pop-up">Play again?</button>
             </section>`
         console.log(`player 1 wins: ${game.player1.wins}`)
@@ -81,7 +93,7 @@ function determineWinner () {
         game.increaseWins()
         notificationDisplay.innerHTML +=`
             <section class="pop-up-container">
-                <p>${game.player2.id} wins!</p>
+                <h4>${game.player2.id} wins!</h4>
                 <button onclick="setTimeout(reloadGame(), 3000)" class="draw-pop-up">Play again?</button>
             </section>`
         console.log(`player 2 wins: ${game.player2.wins}`)
@@ -95,6 +107,9 @@ function determineWinner () {
         console.log("game is a draw")
     }
 }
+
 function reloadGame() {
-    window.location.reload()
+    game.startGame()
+    changeDisplay()
+    // window.location.reload()
 }

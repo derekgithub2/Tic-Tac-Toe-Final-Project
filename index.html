@@ -9,12 +9,12 @@
   </head>
   <body>
     <section class="left-side">
-      <p class="player" id="player1Name">Player 1</p>
+      <h4 class="player" id="player1Name">Player 1</h4>
       <p class="player" id="player1Wins">Wins: </p>
     </section>
     <main>
       <h2>TIC TAC TOE</h2>
-      <div class="notification-display" id="notificationDisplay"></div>
+      <div class="notification-display hidden" id="notificationDisplay">notification placeholder</div>
       <form class="form-container" id="formContainer">
         <fieldset class="player1">
             <label for="PlayerName" id="player1NameLabel">Player 1's Name</label>
@@ -24,7 +24,7 @@
             <label for="PlayerName" id="player1NameLabel">Player 2's Name</label>
             <input type="text" class="form-input" id="player2Input">
         </fieldset>
-        <input type="submit" id="formSubmitButton">
+        <input type="submit" value="Let's Play!" class="submit-button disabled" id="formSubmitButton">
       </form>
       <section class="game-board hidden" id="gameBoard">
         <button type="button" class="box1 board-button" id="0"></button>
@@ -39,7 +39,7 @@
       </section>
     </main>
     <section class="right-side">
-      <p class="player" id="player2Name">Player 2</p>
+      <h4 class="player" id="player2Name">Player 2</h4>
       <p class="player" id="player2Wins">Wins: </p>
     </section>
     <script src="player.js"></script>
