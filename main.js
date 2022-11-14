@@ -1,94 +1,146 @@
-var game = new Game()
+var game = new Game();
 
-// Query Selectors 
-var formContainer = document.querySelector('#formContainer')
-var submitButton = document.querySelector('#formSubmitButton')
-var boardGrid = document.querySelector('#gameBoard')
-var turnDisplay = document.querySelector("#playerTurnDisplay")
+// Query Selectors
+var formContainer = document.querySelector("#formContainer");
+var submitButton = document.querySelector("#formSubmitButton");
+var p1Name = document.querySelector("#player1Name");
+var p2Name = document.querySelector("#player2Name");
+var p1Label = document.querySelector("#player1NameLabel");
+var p1InputName = document.querySelector("#player1Input");
+var p2Label = document.querySelector("#player2NameLabel");
+var p2InputName = document.querySelector("#player2Input");
+var p1Wins = document.querySelector("#player1Wins");
+var p2Wins = document.querySelector("#player2Wins");
+var notificationDisplay = document.querySelector("#notificationDisplay");
+var boardGrid = document.querySelector("#gameBoard");
+var positions = document.querySelectorAll(".board-button");
 
 // Event Listeners
-submitButton.addEventListener('click', function(event){
-    changeDisplay(event)
-    startGame()
-})
-boardGrid.addEventListener('click', function(event){
-    updateBoard(event)
-    game.makeMove(parseInt(event.target.id))
-    game.checkBoard()
-    game.changeTurn()
-})
+formContainer.addEventListener("input", function () {
+  enableSubmitButton();
+});
+
+submitButton.addEventListener("click", function (event) {
+  changeDisplay(event);
+  updatePlayerNames();
+  startGame();
+});
+
+boardGrid.addEventListener("click", function (event) {
+  var indexNum = parseInt(event.target.id);
+  if (preventPlacement(event) === false) {
+    placeToken(indexNum);
+    updateBoard(event);
+    determineWinner();
+    nextTurn();
+  } else {
+    // error handling HERE
+    // console.log("placement of piece prevented.");
+    return false;
+  }
+});
 
 // Functions and Event Handlers
-function startGame () {
-    game.start()
+function startGame() {
+  game.start();
 }
 
-function changeDisplay (event) {
-    event.preventDefault()
-    formContainer.classList.add('hidden')
-    boardGrid.classList.remove('hidden')
+function enableSubmitButton() {
+  if (p1InputName.value !== "" && p2InputName.value !== "") {
+    submitButton.classList.remove("disabled");
+  } else {
+    submitButton.classList.add("disabled");
+  }
 }
 
-function updateBoard (event) {
-    if (event.target.type === 'button') {
-        event.target.innerText = ''
-        event.target.innerText = game.currentPlayer.token
-    } else {
-        // game.changeTurn()
-        console.log("Not a valid spot.")
-    }
+function changeDisplay(event) {
+  notificationDisplay.classList.remove("hidden");
+  formContainer.classList.add("hidden");
+  boardGrid.classList.remove("hidden");
+  event.preventDefault();
 }
 
-// function disableButton (event) {
-//     if (event.target)
-// }
+function updatePlayerNames() {
+  p1Name.innerText = p1InputName.value;
+  p2Name.innerText = p2InputName.value;
+  game.player1.id = p1InputName.value;
+  game.player2.id = p2InputName.value;
+}
 
+function preventPlacement(event) {
+  var attemptedPlacement = event.target;
+  if (attemptedPlacement.innerText === "") {
+    // console.log("spot is okay, let player place");
+    return false;
+  } else {
+    // console.log("prevent placement true");
+    return true;
+  }
+}
 
-// function to determine the winner
-    // for loop through array to see what is spliced into the array at what index
+function nextTurn() {
+  game.changeTurn();
+}
 
-// console.log(game.player1)
-// console.log(game.player2)
+//COME BACK HERE DOUBLE CHECK
+function updateBoard(event) {
+  if (event.target.type === "button" && event.target.innerText === "") {
+    event.target.innerText = game.currentPlayer.token;
+  } else {
+    // error handle HERE
+    // console.log("Not a valid spot.");
+    return false;
+  }
+}
 
-// game.makeMove(0)
-// console.log("counter", game.turnCounter)
-// console.log(game.board)
-// console.log("----------------")
+function placeToken(index) {
+  game.makeMove(index);
+}
 
-// game.changeTurn()
-// console.log("counter", game.turnCounter)
-// game.makeMove(4)
-// console.log(game.board)
+function determineWinner() {
+//   console.log(game.turnCounter);
+  if (game.checkBoard() === game.player1.token) {
+    game.increaseWins();
+    localStorage.setItem("Player1Wins", `${game.player1.wins}`)
+    notificationDisplay.innerHTML = `
+        <section class="pop-up-container">
+            <h4>${game.player1.id} wins!</h4>
+            <button onclick="setTimeout(reloadGame(), 3000)" class="end-game-notification">Play again?</button>
+        </section>`;
+    p1Wins.innerText = `Wins: ${localStorage.getItem("Player1Wins")}`;
+    helpStopMoves()
+  } else if (game.checkBoard() === game.player2.token) {
+    game.increaseWins();
+    localStorage.setItem("Player2Wins", `${game.player2.wins}`)
+    notificationDisplay.innerHTML += `
+        <section class="pop-up-container">
+            <h4>${game.player2.id} wins!</h4>
+            <button onclick="setTimeout(reloadGame(), 3000)" class="end-game-notification">Play again?</button>
+        </section>`;
+    p2Wins.innerText = `Wins: ${localStorage.getItem("Player2Wins")}`;
+    helpStopMoves()
+  } else if (game.turnCounter === 8) {
+    notificationDisplay.innerHTML = `
+        <section class="pop-up-container">
+            <p>It's a draw!</p>
+            <button onclick="setTimeout(reloadGame(), 3000)"
+            class="end-game-notification">Play again?</button>
+        </section>`;
+  }
+}
 
-// console.log("----------------")
-// game.changeTurn()
-// console.log("counter", game.turnCounter)
-// game.makeMove(1)
-// console.log(game.board)
+function helpStopMoves () {
+    for (var i = 0; i < 9; i++) {
+        positions[i].classList.add('disabled')
+      }
+  }
 
-// console.log("----------------")
-// game.changeTurn()
-// console.log("counter", game.turnCounter)
-// game.makeMove(9)
-// console.log(game.board)
-
-// console.log("----------------")
-// game.changeTurn()
-// console.log("counter", game.turnCounter)
-// game.makeMove(2)
-// console.log(game.board)
-
-// console.log(game.player1)
-// console.log(game.player2)
-// game.makeMove(0)
-// game.makeMove(1)
-// game.makeMove(2)
-// game.makeMove(5)
-// console.log(game.board)
-// game.checkBoard()
-// console.log(`Player${game.currentPlayer.id} wins: ${game.currentPlayer.wins}`)
-// console.log(game.player2)
-// console.log(game.player1)
-
-
-
+function reloadGame() {
+  game.start();
+//   console.log(positions)
+  notificationDisplay.innerText = ''
+  for (var i = 0; i < 9; i++) {
+    positions[i].innerText = ''
+    positions[i].classList.remove('disabled')
+  }
+}
