@@ -26,10 +26,7 @@ submitButton.addEventListener('click', function(event){
 
 boardGrid.addEventListener('click', function(event){
     var indexNum = parseInt(event.target.id)
-    console.log(positions)
-    //game.preventPlacement(indexNum) == true
-    // game.preventPlacement(indexNum) == false
-    if (preventPlacement()) {
+    if (preventPlacement(event) === false) {
         placeToken(indexNum)
         updateBoard(event)
         determineWinner()
@@ -55,10 +52,10 @@ function enableSubmitButton () {
 }
 
 function changeDisplay (event) {
-    event.preventDefault()
     notificationDisplay.classList.remove('hidden')
     formContainer.classList.add('hidden')
     boardGrid.classList.remove('hidden')
+    event.preventDefault()
 }
 
 function updatePlayerNames () {
@@ -68,20 +65,22 @@ function updatePlayerNames () {
     game.player2.id = p2InputName.value
 }
 
-function preventPlacement () {
-    if (positions.innerText === '') {
+function preventPlacement (event) {
+    var attemptedPlacement = event.target
+    if (attemptedPlacement.innerText === '') {
+        console.log("spot is okay, let player place")
         return false
     } else {
-        console.log("preventplacement true")
+        console.log("prevent placement true")
         return true
     }
 }
 
 function nextTurn () {
     game.changeTurn()
-    notificationDisplay.innerText = `It's ${game.currentPlayer.id}'s turn!`
 }
 
+//COME BACK HERE DOUBLE CHECK
 function updateBoard (event) {
     if (event.target.type === 'button' && event.target.innerText === "") {
         event.target.innerText = game.currentPlayer.token
@@ -126,7 +125,7 @@ function determineWinner () {
 }
 
 function reloadGame() {
-    game.startGame()
+    game.start()
     changeDisplay()
     // window.location.reload()
 }

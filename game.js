@@ -13,6 +13,7 @@ class Game {
   }
 
   changeTurn() {
+    console.log('change turn is invoked')
     this.turnCounter++;
     // REFACTOR using bang operator.
     if (this.turnCounter % 2 === 1) {
@@ -27,7 +28,7 @@ class Game {
   }
 
   makeMove(indexOfMove) {
-    console.log('makemove in game.js invoked')
+    // console.log('makemove in game.js invoked')
     if (
       this.board[indexOfMove] !== this.player1.token &&
       this.board[indexOfMove] !== this.player2.token
@@ -39,15 +40,6 @@ class Game {
       return false;
     }
   }
-
-//   preventPlacement(indexPlaced) {
-//     if (this.board[indexPlaced] !== this.player1.token && this.player2.token) {
-//       console.log(this.board[indexPlaced]);
-//       return true;
-//     } else if (this.board[indexPlaced] === this.player1.token || this.player2.token) {
-//       return false;
-//     }
-//   }
 
   tokenHelper(a, b, c) {
     return this.board[a] === this.board[b] && this.board[b] === this.board[c];
