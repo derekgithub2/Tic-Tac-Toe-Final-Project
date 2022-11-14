@@ -14,9 +14,10 @@ h2 {
 }
 
 .form-container {
+    height: 30vh;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
     flex-direction: column;
 }
 
@@ -25,7 +26,7 @@ h2 {
     width: 100px;
     border-radius: 2px;
     background-color: #3949fa;
-    color: white;
+    color: black;
 }
 
 .notification-display {
@@ -89,5 +90,5 @@ h2 {
 .disabled {
     pointer-events: none;
     cursor: default;
-    background-color: #acacb5;
+    background-color: white;
 } 

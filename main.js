@@ -35,7 +35,7 @@ boardGrid.addEventListener("click", function (event) {
     nextTurn();
   } else {
     // error handling HERE
-    console.log("placement of piece prevented.");
+    // console.log("placement of piece prevented.");
     return false;
   }
 });
@@ -70,10 +70,10 @@ function updatePlayerNames() {
 function preventPlacement(event) {
   var attemptedPlacement = event.target;
   if (attemptedPlacement.innerText === "") {
-    console.log("spot is okay, let player place");
+    // console.log("spot is okay, let player place");
     return false;
   } else {
-    console.log("prevent placement true");
+    // console.log("prevent placement true");
     return true;
   }
 }
@@ -88,7 +88,7 @@ function updateBoard(event) {
     event.target.innerText = game.currentPlayer.token;
   } else {
     // error handle HERE
-    console.log("Not a valid spot.");
+    // console.log("Not a valid spot.");
     return false;
   }
 }
@@ -98,7 +98,7 @@ function placeToken(index) {
 }
 
 function determineWinner() {
-  console.log(game.turnCounter);
+//   console.log(game.turnCounter);
   if (game.checkBoard() === game.player1.token) {
     game.increaseWins();
     localStorage.setItem("Player1Wins", `${game.player1.wins}`)
@@ -107,7 +107,8 @@ function determineWinner() {
             <h4>${game.player1.id} wins!</h4>
             <button onclick="setTimeout(reloadGame(), 3000)" class="end-game-notification">Play again?</button>
         </section>`;
-    p1Wins.innerText = `${localStorage.getItem("Player1Wins")}`;
+    p1Wins.innerText = `Wins: ${localStorage.getItem("Player1Wins")}`;
+    helpStopMoves()
   } else if (game.checkBoard() === game.player2.token) {
     game.increaseWins();
     localStorage.setItem("Player2Wins", `${game.player2.wins}`)
@@ -116,7 +117,8 @@ function determineWinner() {
             <h4>${game.player2.id} wins!</h4>
             <button onclick="setTimeout(reloadGame(), 3000)" class="end-game-notification">Play again?</button>
         </section>`;
-    p2Wins.innerText = `${localStorage.getItem("Player2Wins")}`;
+    p2Wins.innerText = `Wins: ${localStorage.getItem("Player2Wins")}`;
+    helpStopMoves()
   } else if (game.turnCounter === 8) {
     notificationDisplay.innerHTML = `
         <section class="pop-up-container">
@@ -124,16 +126,21 @@ function determineWinner() {
             <button onclick="setTimeout(reloadGame(), 3000)"
             class="end-game-notification">Play again?</button>
         </section>`;
-    // console.log("game is a draw")
   }
 }
 
+function helpStopMoves () {
+    for (var i = 0; i < 9; i++) {
+        positions[i].classList.add('disabled')
+      }
+  }
+
 function reloadGame() {
   game.start();
-  console.log(positions)
+//   console.log(positions)
   notificationDisplay.innerText = ''
   for (var i = 0; i < 9; i++) {
     positions[i].innerText = ''
+    positions[i].classList.remove('disabled')
   }
-
 }

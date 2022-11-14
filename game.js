@@ -15,7 +15,7 @@ class Game {
   }
 
   changeTurn() {
-    console.log('change turn is invoked')
+    // console.log('change turn is invoked')
     this.turnCounter++;
     // REFACTOR using bang operator.
     if (this.turnCounter % 2 === 1) {
@@ -49,35 +49,35 @@ class Game {
 
   checkBoard() {
     if (this.tokenHelper(0, 1, 2)) {
-      console.log(`${this.currentPlayer.token} wins by top row`);
+    //   console.log(`${this.currentPlayer.token} wins by top row`);
       return this.currentPlayer.token;
     }
     if (this.tokenHelper(3, 4, 5)) {
-      console.log(`${this.currentPlayer.token} wins by middle row`);
+    //   console.log(`${this.currentPlayer.token} wins by middle row`);
       return this.currentPlayer.token;
     }
     if (this.tokenHelper(6, 7, 8)) {
-      console.log(`${this.currentPlayer.token} wins by bottom row`);
+    //   console.log(`${this.currentPlayer.token} wins by bottom row`);
       return this.currentPlayer.token;
     }
     if (this.tokenHelper(0, 4, 8)) {
-      console.log(`${this.currentPlayer.token} wins by top left diag`);
+    //   console.log(`${this.currentPlayer.token} wins by top left diag`);
       return this.currentPlayer.token;
     }
     if (this.tokenHelper(0, 3, 6)) {
-      console.log(`${this.currentPlayer.token} wins by left column`);
+    //   console.log(`${this.currentPlayer.token} wins by left column`);
       return this.currentPlayer.token;
     }
     if (this.tokenHelper(1, 4, 7)) {
-      console.log(`${this.currentPlayer.token} wins middle column`);
+    //   console.log(`${this.currentPlayer.token} wins middle column`);
       return this.currentPlayer.token;
     }
     if (this.tokenHelper(2, 5, 8)) {
-      console.log(`${this.currentPlayer.token} wins right column`);
+    //   console.log(`${this.currentPlayer.token} wins right column`);
       return this.currentPlayer.token;
     }
     if (this.tokenHelper(2, 4, 6)) {
-      console.log(`${this.currentPlayer.token} wins top right diag`);
+    //   console.log(`${this.currentPlayer.token} wins top right diag`);
       return this.currentPlayer.token;
     }
   }
