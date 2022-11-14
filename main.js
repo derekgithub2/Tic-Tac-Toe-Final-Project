@@ -34,8 +34,6 @@ boardGrid.addEventListener("click", function (event) {
     determineWinner();
     nextTurn();
   } else {
-    // error handling HERE
-    // console.log("placement of piece prevented.");
     return false;
   }
 });
@@ -70,16 +68,22 @@ function updatePlayerNames() {
 function preventPlacement(event) {
   var attemptedPlacement = event.target;
   if (attemptedPlacement.innerText === "") {
-    // console.log("spot is okay, let player place");
     return false;
   } else {
-    // console.log("prevent placement true");
     return true;
   }
 }
 
 function nextTurn() {
   game.changeTurn();
+  if (game.currentPlayer === game.player2) {
+    p2Name.innerText += ` it's your turn! Make your move!`;
+    p1Name.innerText = `${game.player1.id}`;
+  }
+  if (game.currentPlayer === game.player1) {
+    p1Name.innerText += ` it's your turn! Make your move!`;
+    p2Name.innerText = `${game.player2.id}`;
+  }
 }
 
 //COME BACK HERE DOUBLE CHECK
@@ -88,7 +92,6 @@ function updateBoard(event) {
     event.target.innerText = game.currentPlayer.token;
   } else {
     // error handle HERE
-    // console.log("Not a valid spot.");
     return false;
   }
 }
@@ -98,27 +101,26 @@ function placeToken(index) {
 }
 
 function determineWinner() {
-//   console.log(game.turnCounter);
   if (game.checkBoard() === game.player1.token) {
     game.increaseWins();
-    localStorage.setItem("Player1Wins", `${game.player1.wins}`)
+    localStorage.setItem("Player1Wins", `${game.player1.wins}`);
     notificationDisplay.innerHTML = `
         <section class="pop-up-container">
             <h4>${game.player1.id} wins!</h4>
             <button onclick="setTimeout(reloadGame(), 3000)" class="end-game-notification">Play again?</button>
         </section>`;
     p1Wins.innerText = `Wins: ${localStorage.getItem("Player1Wins")}`;
-    helpStopMoves()
+    helpStopMoves();
   } else if (game.checkBoard() === game.player2.token) {
     game.increaseWins();
-    localStorage.setItem("Player2Wins", `${game.player2.wins}`)
+    localStorage.setItem("Player2Wins", `${game.player2.wins}`);
     notificationDisplay.innerHTML += `
         <section class="pop-up-container">
             <h4>${game.player2.id} wins!</h4>
             <button onclick="setTimeout(reloadGame(), 3000)" class="end-game-notification">Play again?</button>
         </section>`;
     p2Wins.innerText = `Wins: ${localStorage.getItem("Player2Wins")}`;
-    helpStopMoves()
+    helpStopMoves();
   } else if (game.turnCounter === 8) {
     notificationDisplay.innerHTML = `
         <section class="pop-up-container">
@@ -127,20 +129,26 @@ function determineWinner() {
             class="end-game-notification">Play again?</button>
         </section>`;
   }
+  resetNames();
 }
 
-function helpStopMoves () {
-    for (var i = 0; i < 9; i++) {
-        positions[i].classList.add('disabled')
-      }
+function helpStopMoves() {
+  for (var i = 0; i < 9; i++) {
+    positions[i].classList.add("disabled");
   }
+}
 
 function reloadGame() {
   game.start();
-//   console.log(positions)
-  notificationDisplay.innerText = ''
+  notificationDisplay.innerText = "";
   for (var i = 0; i < 9; i++) {
-    positions[i].innerText = ''
-    positions[i].classList.remove('disabled')
+    positions[i].innerText = "";
+    positions[i].classList.remove("disabled");
   }
+  resetNames();
+}
+
+function resetNames() {
+  p1Name.innerText = `${game.player1.id}`;
+  p2Name.innerText = `${game.player2.id}`;
 }
