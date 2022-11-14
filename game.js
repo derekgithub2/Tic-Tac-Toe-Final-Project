@@ -10,6 +10,8 @@ class Game {
   start() {
     this.currentPlayer = this.player1;
     this.currentPlayer.turn = true;
+    this.board = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+    this.turnCounter = 0;
   }
 
   changeTurn() {

@@ -3,7 +3,7 @@
 /* MAIN */
 body {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     border: 5px solid black;
 }
 
