@@ -3,14 +3,15 @@ var game = new Game()
 // Query Selectors 
 var formContainer = document.querySelector('#formContainer')
 var submitButton = document.querySelector('#formSubmitButton')
-var boardGrid = document.querySelector('#gameBoard')
-var notificationDisplay = document.querySelector("#notificationDisplay")
 var p1Name = document.querySelector('#player1Name')
 var p2Name = document.querySelector('#player2Name')
 var p1Label = document.querySelector('#player1NameLabel')
 var p1InputName = document.querySelector('#player1Input')
 var p2Label = document.querySelector('#player2NameLabel')
 var p2InputName = document.querySelector('#player2Input')
+var notificationDisplay = document.querySelector("#notificationDisplay")
+var boardGrid = document.querySelector('#gameBoard')
+var positions = document.querySelectorAll('.board-button')
 
 // Event Listeners
 formContainer.addEventListener('input', function () {
@@ -25,12 +26,15 @@ submitButton.addEventListener('click', function(event){
 
 boardGrid.addEventListener('click', function(event){
     var indexNum = parseInt(event.target.id)
-    if (game.preventPlacement(indexNum) == true) {
+    console.log(positions)
+    //game.preventPlacement(indexNum) == true
+    // game.preventPlacement(indexNum) == false
+    if (preventPlacement()) {
         placeToken(indexNum)
         updateBoard(event)
         determineWinner()
-        game.changeTurn()
-    } else if (game.preventPlacement(indexNum) == false) {
+        nextTurn()
+    } else {
         // error handling HERE
         console.log("placement of piece prevented.")
         return false
@@ -57,12 +61,25 @@ function changeDisplay (event) {
     boardGrid.classList.remove('hidden')
 }
 
-// function to use player input as their name
 function updatePlayerNames () {
     p1Name.innerText = p1InputName.value
     p2Name.innerText = p2InputName.value
     game.player1.id = p1InputName.value
     game.player2.id = p2InputName.value
+}
+
+function preventPlacement () {
+    if (positions.innerText === '') {
+        return false
+    } else {
+        console.log("preventplacement true")
+        return true
+    }
+}
+
+function nextTurn () {
+    game.changeTurn()
+    notificationDisplay.innerText = `It's ${game.currentPlayer.id}'s turn!`
 }
 
 function updateBoard (event) {
