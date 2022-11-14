@@ -1,6 +1,5 @@
 var game = new Game();
 
-// Query Selectors
 var formContainer = document.querySelector("#formContainer");
 var submitButton = document.querySelector("#formSubmitButton");
 var p1Name = document.querySelector("#player1Name");
@@ -15,7 +14,6 @@ var notificationDisplay = document.querySelector("#notificationDisplay");
 var boardGrid = document.querySelector("#gameBoard");
 var positions = document.querySelectorAll(".board-button");
 
-// Event Listeners
 formContainer.addEventListener("input", function () {
   enableSubmitButton();
 });
@@ -38,7 +36,6 @@ boardGrid.addEventListener("click", function (event) {
   }
 });
 
-// Functions and Event Handlers
 function startGame() {
   game.start();
 }
@@ -86,12 +83,10 @@ function nextTurn() {
   }
 }
 
-//COME BACK HERE DOUBLE CHECK
 function updateBoard(event) {
   if (event.target.type === "button" && event.target.innerText === "") {
     event.target.innerText = game.currentPlayer.token;
   } else {
-    // error handle HERE
     return false;
   }
 }
