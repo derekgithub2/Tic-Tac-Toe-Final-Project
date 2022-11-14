@@ -101,22 +101,22 @@ function determineWinner() {
   console.log(game.turnCounter);
   if (game.checkBoard() === game.player1.token) {
     game.increaseWins();
+    localStorage.setItem("Player1Wins", `${game.player1.wins}`)
     notificationDisplay.innerHTML = `
         <section class="pop-up-container">
             <h4>${game.player1.id} wins!</h4>
             <button onclick="setTimeout(reloadGame(), 3000)" class="end-game-notification">Play again?</button>
         </section>`;
-    p1Wins.innerText += `${game.player1.wins}`;
-    // console.log(`player 1 wins: ${game.player1.wins}`)
+    p1Wins.innerText = `${localStorage.getItem("Player1Wins")}`;
   } else if (game.checkBoard() === game.player2.token) {
     game.increaseWins();
+    localStorage.setItem("Player2Wins", `${game.player2.wins}`)
     notificationDisplay.innerHTML += `
         <section class="pop-up-container">
             <h4>${game.player2.id} wins!</h4>
             <button onclick="setTimeout(reloadGame(), 3000)" class="end-game-notification">Play again?</button>
         </section>`;
-    p2Wins.innerText += `${game.player2.wins}`;
-    // console.log(`player 2 wins: ${game.player2.wins}`)
+    p2Wins.innerText = `${localStorage.getItem("Player2Wins")}`;
   } else if (game.turnCounter === 8) {
     notificationDisplay.innerHTML = `
         <section class="pop-up-container">
@@ -130,6 +130,10 @@ function determineWinner() {
 
 function reloadGame() {
   game.start();
-  // notificationDisplay.innerHTML = ''
-  window.location.reload();
+  console.log(positions)
+  notificationDisplay.innerText = ''
+  for (var i = 0; i < 9; i++) {
+    positions[i].innerText = ''
+  }
+
 }
