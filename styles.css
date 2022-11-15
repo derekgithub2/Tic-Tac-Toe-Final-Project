@@ -2,6 +2,7 @@
 * {
     font-family: 'Open Sans', sans-serif;
     font-family: 'Roboto', sans-serif;
+    color: white;
 }
 
 /* MAIN */
@@ -10,6 +11,9 @@ body {
     justify-content: space-evenly;
     border: 5px solid black;
     padding-top: 60px;
+    background-image: url('./assets/winter-night-background.jpg');
+    background-size: auto;
+    background-repeat: no-repeat;
 }
 
 main {
@@ -28,42 +32,52 @@ h2 {
     align-items: center;
     justify-content: space-evenly;
     flex-direction: column;
+    /* color: black; */
+    font-weight: bold;
 }
 
+input {
+    color: black;
+}
+
+button,
 .submit-button {
     height: 35px;
     width: 100px;
     border-radius: 2px;
-    background-color: #3949fa;
-    color: white;
+    background-color: gold;
 }
 
 .notification-display {
     font-size: 20px;
     display: flex;
     justify-content: center;
-    /* background-color: lightskyblue; */
     font: bold;
 }
 
+.notification-container,
 .game-board {
     position: relative;
     width: 30%;
     display: flex;
     width: 50vh;
-    padding: 80px 10px 50px;
+    /* padding: 80px 10px 50px; */
     align-content: center;
     justify-content: center;
     flex-wrap: wrap;
-    border: 3px solid black;
+    /* border: 3px solid black; */
 }
+
+/* .notification-container {
+    padding:none;
+} */
 
 .board-button {
     font-size: 30px;
     height: 100px;
     width: 30%;
     border: none;
-    background-color: white;
+    background-color: none;
     cursor: pointer;
 }
 
@@ -87,6 +101,7 @@ h2 {
 
 .left-side,
 .right-side {
+    font-size: 36px;
     width: 20%;
     height: 75vh;
     color: black;

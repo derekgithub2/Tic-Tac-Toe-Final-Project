@@ -1,8 +1,8 @@
 class Game {
   constructor() {
     this.board = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-    this.player1 = new Player(1, null);
-    this.player2 = new Player(2, null);
+    this.player1 = new Player(1, "⛄️");
+    this.player2 = new Player(2, "☀️");
     this.currentPlayer = this.player1;
     this.turnCounter = 0;
   }
