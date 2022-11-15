@@ -10,9 +10,11 @@ var p2Label = document.querySelector("#player2NameLabel");
 var p2InputName = document.querySelector("#player2Input");
 var p1Wins = document.querySelector("#player1Wins");
 var p2Wins = document.querySelector("#player2Wins");
+var notificationContainer = document.querySelector("#notificationContainer")
 var notificationDisplay = document.querySelector("#notificationDisplay");
 var boardGrid = document.querySelector("#gameBoard");
 var positions = document.querySelectorAll(".board-button");
+var h2 = document.getElementsByTagName('h2')
 
 formContainer.addEventListener("input", function () {
   enableSubmitButton();
@@ -49,7 +51,6 @@ function enableSubmitButton() {
 }
 
 function changeDisplay(event) {
-  notificationDisplay.classList.remove("hidden");
   formContainer.classList.add("hidden");
   boardGrid.classList.remove("hidden");
   event.preventDefault();
@@ -73,14 +74,7 @@ function preventPlacement(event) {
 
 function nextTurn() {
   game.changeTurn();
-  if (game.currentPlayer === game.player2) {
-    p2Name.innerText += ` it's your turn! Make your move!`;
-    p1Name.innerText = `${game.player1.id}`;
-  }
-  if (game.currentPlayer === game.player1) {
-    p1Name.innerText += ` it's your turn! Make your move!`;
-    p2Name.innerText = `${game.player2.id}`;
-  }
+  notificationDisplay.innerText = `It's ${game.currentPlayer.token}'s turn!`
 }
 
 function updateBoard(event) {
@@ -99,28 +93,31 @@ function determineWinner() {
   if (game.checkBoard() === game.player1.token) {
     game.increaseWins();
     localStorage.setItem("Player1Wins", `${game.player1.wins}`);
-    notificationDisplay.innerHTML = `
+    notificationContainer.classList.remove('hidden')
+    notificationContainer.innerHTML = `
         <section class="pop-up-container">
             <h4>${game.player1.id} wins!</h4>
-            <button onclick="setTimeout(reloadGame(), 3000)" class="end-game-notification">Play again?</button>
+            <button onclick="setTimeout(reloadGame(event), 3000)" class="end-game-notification">Play again?</button>
         </section>`;
     p1Wins.innerText = `Wins: ${localStorage.getItem("Player1Wins")}`;
     helpStopMoves();
   } else if (game.checkBoard() === game.player2.token) {
     game.increaseWins();
     localStorage.setItem("Player2Wins", `${game.player2.wins}`);
-    notificationDisplay.innerHTML += `
+    notificationContainer.classList.remove('hidden')
+    notificationContainer.innerHTML = `
         <section class="pop-up-container">
             <h4>${game.player2.id} wins!</h4>
-            <button onclick="setTimeout(reloadGame(), 3000)" class="end-game-notification">Play again?</button>
+            <button onclick="setTimeout(reloadGame(event), 3000)" class="end-game-notification">Play again?</button>
         </section>`;
     p2Wins.innerText = `Wins: ${localStorage.getItem("Player2Wins")}`;
     helpStopMoves();
   } else if (game.turnCounter === 8) {
-    notificationDisplay.innerHTML = `
+    notificationContainer.classList.remove('hidden')
+    notificationContainer.innerHTML = `
         <section class="pop-up-container">
             <p>It's a draw!</p>
-            <button onclick="setTimeout(reloadGame(), 3000)"
+            <button onclick="setTimeout(reloadGame(event), 3000)"
             class="end-game-notification">Play again?</button>
         </section>`;
   }
@@ -135,7 +132,8 @@ function helpStopMoves() {
 
 function reloadGame() {
   game.start();
-  notificationDisplay.innerText = "";
+  notificationContainer.classList.add('hidden')
+  notificationDisplay.innerText = `It's ${game.currentPlayer.token}'s turn!`
   for (var i = 0; i < 9; i++) {
     positions[i].innerText = "";
     positions[i].classList.remove("disabled");
