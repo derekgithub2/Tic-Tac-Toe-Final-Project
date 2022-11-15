@@ -1,10 +1,21 @@
-/* GLOBAL */
+* {
+    font-family: 'Open Sans', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    color: white;
+}
 
-/* MAIN */
 body {
     display: flex;
     justify-content: space-evenly;
     border: 5px solid black;
+    padding-top: 60px;
+    background-image: url('./assets/winter-night-background.jpg');
+    background-size: auto;
+    background-repeat: no-repeat;
+}
+
+main {
+    align-content: center;
 }
 
 h2 {
@@ -13,36 +24,54 @@ h2 {
     justify-content: center;
 }
 
+h4 {
+    margin: 20px 0px;
+}
+
 .form-container {
     height: 30vh;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     flex-direction: column;
+    font-weight: bold;
 }
 
+input {
+    color: black;
+}
+
+button,
 .submit-button {
     height: 35px;
     width: 100px;
     border-radius: 2px;
-    background-color: #3949fa;
-    color: black;
+    background-color: goldenrod;
+    font-weight: 700;
 }
 
 .notification-display {
-    font-size: 20px;
+    font-size: 36px;
     display: flex;
     justify-content: center;
+    font: bold;
 }
 
+.notification-container,
 .game-board {
+    position: relative;
+    width: 30%;
     display: flex;
     width: 50vh;
-    padding: 80px 10px;
     align-content: center;
     justify-content: center;
     flex-wrap: wrap;
-    border: 3px solid black;
+}
+
+.notification-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
 }
 
 .board-button {
@@ -50,7 +79,7 @@ h2 {
     height: 100px;
     width: 30%;
     border: none;
-    background-color: white;
+    background-color: none;
     cursor: pointer;
 }
 
@@ -74,13 +103,15 @@ h2 {
 
 .left-side,
 .right-side {
+    font-size: 36px;
     width: 20%;
     height: 75vh;
     color: black;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 50px;
+    justify-items: space-around;
+    padding: 50px 0px;
 }
 
 .hidden {
@@ -90,5 +121,5 @@ h2 {
 .disabled {
     pointer-events: none;
     cursor: default;
-    background-color: white;
+    color:black;
 } 
