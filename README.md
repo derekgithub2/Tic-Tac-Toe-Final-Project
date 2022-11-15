@@ -11,6 +11,7 @@ This web application is a game of TicTacToe written in JavaScript. Players can t
 
 ### Preview of App:
 [//]: <> (Provide ONE gif or screenshot of your application - choose the "coolest" piece of functionality to show off.)
+![TicTacToe_Preview_AdobeExpress](https://user-images.githubusercontent.com/113647295/202048985-124af38c-598b-4edd-8063-deea5bd82a07.gif)
 
 
 ### Context:
