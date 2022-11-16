@@ -5,6 +5,16 @@ class Game {
     this.player2 = new Player(2, "❄️");
     this.currentPlayer = this.player1;
     this.turnCounter = 0;
+    this.winCondition = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6],
+    ]
   }
 
   start() {
@@ -40,34 +50,18 @@ class Game {
     }
   }
 
-  tokenHelper(a, b, c) {
-    return this.board[a] === this.board[b] && this.board[b] === this.board[c];
-  }
-
   checkBoard() {
-    if (this.tokenHelper(0, 1, 2)) {
-      return this.currentPlayer.token;
-    }
-    if (this.tokenHelper(3, 4, 5)) {
-      return this.currentPlayer.token;
-    }
-    if (this.tokenHelper(6, 7, 8)) {
-      return this.currentPlayer.token;
-    }
-    if (this.tokenHelper(0, 4, 8)) {
-      return this.currentPlayer.token;
-    }
-    if (this.tokenHelper(0, 3, 6)) {
-      return this.currentPlayer.token;
-    }
-    if (this.tokenHelper(1, 4, 7)) {
-      return this.currentPlayer.token;
-    }
-    if (this.tokenHelper(2, 5, 8)) {
-      return this.currentPlayer.token;
-    }
-    if (this.tokenHelper(2, 4, 6)) {
-      return this.currentPlayer.token;
+    for (var i = 0; i < 8; i++) {
+      var index = this.winCondition[i]
+      var a = this.board[index[0]]
+      var b = this.board[index[1]]
+      var c = this.board[index[2]]
+      if (a === '' || b === '' || c === '') {
+        continue
+      } 
+      if (a === b && b === c) {
+        return this.currentPlayer.token
+      }
     }
   }
 
